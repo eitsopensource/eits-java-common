@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>br.com.eits</groupId>
+	<artifactId>eits-java-common</artifactId>
+	<version>1.0.6-RELEASE</version>
+	
+	<!-- Properties -->
+	<properties>
+    	<!-- Maven -->
+		<maven.test.failure.ignore>true</maven.test.failure.ignore>
+    	<!-- Java -->
+    	<java.version>1.7</java.version>
+    	
+		<hibernate.version>4.3.8.Final</hibernate.version>
+		<hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
+		<modeshape.version>4.2.0.Final</modeshape.version>
+		<springframework.version>4.2.0.RELEASE</springframework.version>
+		<spring-data.version>1.9.0.RELEASE</spring-data.version>
+		<dwr.version>3.0.0-RELEASE</dwr.version>
+		<dbunit.version>2.5.0</dbunit.version>
+		<springtestdbunit.version>1.2.1</springtestdbunit.version>
+	</properties>
+	
+	<!-- Build -->
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<!-- Repositories -->
+	<repositories>
+		<repository>
+			<id>eits-repository-release</id>
+          	<url>http://maven.eits.com.br/content/repositories/releases</url>
+		</repository>
+	</repositories>
+	
+	<distributionManagement>
+		<repository>
+			<id>eits-repository-release</id>
+          	<url>http://maven.eits.com.br/content/repositories/releases</url>
+		</repository>
+  		<snapshotRepository>
+    		<id>eits-repository-snapshot</id>
+     		<url>http://maven.eits.com.br/content/repositories/snapshots/</url>
+  		</snapshotRepository>
+	</distributionManagement>
+	
+	<dependencies>
+	
+		<!-- JPA / Hibernate -->
+		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>${hibernate-validator.version}</version>
+		</dependency>
+	    <dependency>
+	        <groupId>org.springframework.data</groupId>
+	        <artifactId>spring-data-jpa</artifactId>
+	        <version>${spring-data.version}</version>
+	    </dependency>
+        
+        <!-- JCR - ModeShape -->
+        <dependency>
+            <groupId>org.modeshape</groupId>
+            <artifactId>modeshape-jcr</artifactId>
+            <version>${modeshape.version}</version>
+        </dependency>
+        
+        <!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+  		</dependency>
+		
+  		<!-- DWR -->
+		<dependency>
+    		<groupId>org.directwebremoting</groupId>
+    		<artifactId>dwr</artifactId>
+    		<version>${dwr.version}</version>
+  		</dependency>
+		
+		<!-- Testing -->
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>${dbunit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.springtestdbunit</groupId>
+		  	<artifactId>spring-test-dbunit</artifactId>
+		  	<version>${springtestdbunit.version}</version>
+		</dependency>
+
+	</dependencies>
+	
+</project>

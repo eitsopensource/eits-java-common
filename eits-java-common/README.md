@@ -1,0 +1,1 @@
+mvn deploy -DperformRelease=true -Dmaven.javadoc.skip=true
