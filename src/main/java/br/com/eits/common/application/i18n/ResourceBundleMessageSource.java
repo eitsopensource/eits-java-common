@@ -5,11 +5,25 @@ import java.util.Locale;
 import java.util.Properties;
 
 /**
+ * 
  * @author rodrigo
- *
  */
 public class ResourceBundleMessageSource extends ReloadableResourceBundleMessageSource
 {
+	/*-------------------------------------------------------------------
+	 * 		 					CONSTRUCTORS
+	 *-------------------------------------------------------------------*/
+	/**
+	 * 
+	 */
+	public ResourceBundleMessageSource()
+	{
+		MessageSourceHolder.setMessageSource( this );
+	}
+
+	/*-------------------------------------------------------------------
+	 * 		 					BEHAVIORS
+	 *-------------------------------------------------------------------*/
 	/**
 	 * 
 	 * @param locale idioma para obter os bundles
