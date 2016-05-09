@@ -52,8 +52,8 @@ public class HibernateBeanConverter extends BeanConverter
 	/*-------------------------------------------------------------------
 	 * 		 					BEHAVIORS
 	 *-------------------------------------------------------------------*/
-    /* (non-Javadoc)
-     * @see org.directwebremoting.convert.BeanConverter#getPropertyMapFromObject(java.lang.Object, boolean, boolean)
+    /**
+     * 
      */
     @Override
     public Map<String, Property> getPropertyMapFromObject( Object example, boolean readRequired, boolean writeRequired ) throws ConversionException
@@ -149,9 +149,7 @@ public class HibernateBeanConverter extends BeanConverter
     }
 
     /**
-     * Hibernate makes {@link Class#getClass()} difficult ...
-     * @param example The class that we want to call {@link Class#getClass()} on
-     * @return The type of the given object
+     * 
      */
     public Class<?> getClass(Object example)
     {
@@ -188,12 +186,7 @@ public class HibernateBeanConverter extends BeanConverter
     }
 
     /**
-     * Cache the method if possible, using the classname and property name to
-     * allow for similar named methods.
-     * @param data The bean to introspect
-     * @param property The property to get the accessor for
-     * @return The getter method
-     * @throws IntrospectionException If Introspector.getBeanInfo() fails
+     * 
      */
     protected Method findGetter(Object data, String property) throws IntrospectionException
     {
@@ -221,7 +214,7 @@ public class HibernateBeanConverter extends BeanConverter
     }
 
     /**
-     * @param assumeSession the assumeSession to set
+     * 
      */
     public void setAssumeSession(boolean assumeSession)
     {

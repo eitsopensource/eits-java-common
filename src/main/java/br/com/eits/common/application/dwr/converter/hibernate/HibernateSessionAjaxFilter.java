@@ -35,8 +35,8 @@ public class HibernateSessionAjaxFilter implements AjaxFilter
 	/*-------------------------------------------------------------------
 	 * 		 					BEHAVIORS
 	 *-------------------------------------------------------------------*/
-    /* (non-Javadoc)
-     * @see org.directwebremoting.AjaxFilter#doFilter(java.lang.Object, java.lang.reflect.Method, java.lang.Object[], org.directwebremoting.AjaxFilterChain)
+    /**
+     * 
      */
     public Object doFilter(Object object, Method method, Object[] params, AjaxFilterChain chain) throws Exception
     {

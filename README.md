@@ -1,7 +1,7 @@
 #Features
 
 ##MessageSourceHolder
-####This component can be used to call statically a instance of **MessageSource**
+####This component can be used to call statically an instance of **MessageSource**
 Example
 ![](http://s32.postimg.org/b3pk3fjlx/Screen_Shot_2016_05_08_at_12_55_56_PM.png)
 
