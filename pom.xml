@@ -4,7 +4,7 @@
 	
 	<groupId>br.com.eits</groupId>
 	<artifactId>eits-java-common</artifactId>
-	<version>1.0.6-RELEASE</version>
+	<version>1.0.7-RELEASE</version>
 	
 	<!-- Properties -->
 	<properties>
@@ -18,6 +18,7 @@
 		<modeshape.version>4.2.0.Final</modeshape.version>
 		<springframework.version>4.2.0.RELEASE</springframework.version>
 		<spring-data.version>1.9.0.RELEASE</spring-data.version>
+		<jasper.version>6.2.2</jasper.version>
 		<dwr.version>3.0.0-RELEASE</dwr.version>
 		<dbunit.version>2.5.0</dbunit.version>
 		<springtestdbunit.version>1.2.1</springtestdbunit.version>
@@ -110,6 +111,13 @@
 			<version>2.5</version>
 			<scope>provided</scope>
   		</dependency>
+  		
+		<!-- Jasper Reports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>${jasper.version}</version>
+		</dependency>
 		
   		<!-- DWR -->
 		<dependency>

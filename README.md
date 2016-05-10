@@ -28,6 +28,19 @@ Infrastructure to store files via JCR implemented by Modeshape supported by a ge
 ```java
 CascadeTruncateTableOperation.java
 ```
+##ReportManager
+####Report generator implemented by `JasperReportManager`
+Supported methods:
+```java
+	public ByteArrayOutputStream exportToPDF( Map<String, Object> parameters, String reportPath );
+	public ByteArrayOutputStream exportToHTML( Map<String, Object> parameters, String reportPath );
+	public ByteArrayOutputStream exportToXML( Map<String, Object> parameters, String reportPath );
+	public ByteArrayOutputStream exportToXLS( Map<String, Object> parameters, String reportPath );
+```
+
+##MimeType
+####Enum constants for 450 mimetypes.
+
 
 #Final Build
 mvn deploy -DperformRelease=true -Dmaven.javadoc.skip=true
