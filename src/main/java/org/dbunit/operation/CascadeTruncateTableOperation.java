@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 
  * @author rodrigo@eits.com.br
+ * @deprecated Please use the sprint test @SQL
  */
 public class CascadeTruncateTableOperation extends TruncateTableOperation
 {

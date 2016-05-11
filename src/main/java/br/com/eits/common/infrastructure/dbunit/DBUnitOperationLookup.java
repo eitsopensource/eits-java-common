@@ -11,6 +11,7 @@ import com.github.springtestdbunit.operation.DatabaseOperationLookup;
 /**
  * 
  * @author rodrigo@eits.com.br
+ * @deprecated Please use the sprint test @SQL
  */
 public class DBUnitOperationLookup implements DatabaseOperationLookup
 {

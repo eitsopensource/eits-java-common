@@ -9,7 +9,7 @@ import com.github.springtestdbunit.TestExecutionListenerChain;
 /**
  * 
  * @author rodrigo
- *
+ * @deprecated Please use the sprint test @SQL
  */
 @Order(10)
 public class TransactionDbUnitTestExecutionListener extends TestExecutionListenerChain
