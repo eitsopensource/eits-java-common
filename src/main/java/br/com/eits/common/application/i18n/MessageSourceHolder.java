@@ -50,6 +50,12 @@ public class MessageSourceHolder
 		return getMessage( code, defaultMessage, (Object[]) null );
 	}
 	
+	/**
+	 * 
+	 * @param code
+	 * @param args
+	 * @return
+	 */
 	public static String getMessage( String code, Object... args )
 	{
 		return getMessage( code, code, args );

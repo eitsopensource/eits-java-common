@@ -4,7 +4,7 @@
 	
 	<groupId>br.com.eits</groupId>
 	<artifactId>eits-java-common</artifactId>
-	<version>1.0.7-RELEASE</version>
+	<version>1.0.8-RELEASE</version>
 	
 	<!-- Properties -->
 	<properties>
