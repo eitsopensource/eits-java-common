@@ -4,7 +4,7 @@
 	
 	<groupId>br.com.eits</groupId>
 	<artifactId>eits-java-common</artifactId>
-	<version>1.0.9-RELEASE</version>
+	<version>1.0.10-RELEASE</version>
 	
 	<!-- Properties -->
 	<properties>
@@ -22,6 +22,9 @@
 		<dwr.version>3.0.0-RELEASE</dwr.version>
 		<dbunit.version>2.5.0</dbunit.version>
 		<springtestdbunit.version>1.2.1</springtestdbunit.version>
+		<springtestdbunit.version>1.2.1</springtestdbunit.version>
+		<apache-poi.version>3.14</apache-poi.version>
+		
 	</properties>
 	
 	<!-- Build -->
@@ -117,6 +120,13 @@
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
 			<version>${jasper.version}</version>
+		</dependency>
+		
+		<!-- Apache Poi -->
+		<dependency>
+		   <groupId>org.apache.poi</groupId>
+		   <artifactId>poi</artifactId>
+		   <version>${apache-poi.version}</version>
 		</dependency>
 		
   		<!-- DWR -->
