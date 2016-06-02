@@ -20,7 +20,11 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 /**
  * Classe abstrata responsável por gerar o stream de relatórios com Jasper
@@ -172,13 +176,46 @@ public class JasperReportManager implements IReportManager
 	}
 	
 	/* (non-Javadoc)
-	 * @see br.com.eits.common.infrastructure.report.IReportManager#exportToXLS(java.util.Map, java.lang.String)
-	 */
+	* @see br.com.eits.common.infrastructure.report.IReportManager#exportToXLS(java.util.Map, java.lang.String)
+	*/
 	@Override
 	public ByteArrayOutputStream exportToXLS( Map<String, Object> parameters, String reportPath )
 	{
-		throw new NotImplementedException( "Not implemented yet." );
+		SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+		configuration.setOnePagePerSheet(true);
+		configuration.setDetectCellType(true);
+		configuration.setCollapseRowSpan(true);
+		configuration.setWhitePageBackground(false);
+	    return this.exportToXLS( parameters, reportPath, configuration );   
+	}	
+	
+	/* (non-Javadoc)
+	 * @see br.com.eits.common.infrastructure.report.IReportManager#exportToXLS(java.util.Map, java.lang.String, net.sf.jasperreports.export.SimpleXlsReportConfiguration)
+	 */
+	@Override
+	public ByteArrayOutputStream exportToXLS( Map<String, Object> parameters, String reportPath, SimpleXlsReportConfiguration configuration )
+	{
+		final JasperReport jasperReport = this.createJasperReport( reportPath );
+		final JasperPrint jasperPrint = this.fillReport( jasperReport, parameters );
+	
+		try
+		{
+			final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+			JRXlsExporter exporter = new JRXlsExporter();
+		
+			exporter.setExporterInput( new SimpleExporterInput(jasperPrint));
+			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(byteArrayOutputStream));
+			exporter.setConfiguration(configuration);
+			exporter.exportReport();
+		
+			return byteArrayOutputStream;
+		}
+		catch ( Exception e )
+		{
+			throw new IllegalStateException( "Was not possible generate a XLS stream of report: '"+jasperReport.getName()+"'", e );
+		}
 	}
+	
 
 	/* (non-Javadoc)
 	 * @see br.com.eits.common.infrastructure.report.IReportManager#exportToXML(java.util.Map, java.lang.String)
