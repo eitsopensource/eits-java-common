@@ -14,7 +14,6 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.NodeTypeTemplate;
 import javax.jcr.nodetype.PropertyDefinitionTemplate;
 
-import org.infinispan.schematic.document.ParsingException;
 import org.modeshape.jcr.ConfigurationException;
 import org.modeshape.jcr.ModeShapeEngine;
 import org.modeshape.jcr.RepositoryConfiguration;
@@ -63,13 +62,12 @@ public class ModeShapeRepositoryFactory implements FactoryBean<Repository>
 	/**
 	 * 
 	 *
-	 * @throws ParsingException
 	 * @throws IOException
 	 * @throws ConfigurationException
 	 * @throws RepositoryException
 	 */
 	@PostConstruct
-	public void start() throws ParsingException, IOException, ConfigurationException, RepositoryException
+	public void start() throws IOException, ConfigurationException, RepositoryException
 	{
 		Assert.notNull(configuration, "The repository configuration file is required");
 		
