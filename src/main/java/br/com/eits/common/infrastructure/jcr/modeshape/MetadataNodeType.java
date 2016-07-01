@@ -36,6 +36,10 @@ public class MetadataNodeType
 	 * Define a propriedade de descrição
 	 */
 	public static final String PROPERTY_DESCRIPTION = "description"; 
+	/**
+	 * Define a propriedade de descrição
+	 */
+	public static final String PROPERTY_CONTENT_TYPE = "contentType"; 
 	
 	/**
 	 * 
