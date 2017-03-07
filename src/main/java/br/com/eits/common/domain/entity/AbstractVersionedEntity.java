@@ -1,9 +1,12 @@
 package br.com.eits.common.domain.entity;
 
-import java.util.Calendar;
-
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 
@@ -11,7 +14,9 @@ import javax.persistence.Version;
  * @since 05/05/2016
  * @version 1.0
  */
+@Data
 @MappedSuperclass
+@EqualsAndHashCode(callSuper=true)
 public abstract class AbstractVersionedEntity extends AbstractEntity
 {
 	/**
@@ -25,8 +30,10 @@ public abstract class AbstractVersionedEntity extends AbstractEntity
 	/**
 	 * 
 	 */
+	@NotNull
 	@Version
-	private Calendar version;
+	@Column(nullable=false)
+	private Long version;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -54,18 +61,4 @@ public abstract class AbstractVersionedEntity extends AbstractEntity
 	/*-------------------------------------------------------------------
 	 *				 	    GETTERS AND SETTERS
 	 *-------------------------------------------------------------------*/
-	/**
-	 * @return the version
-	 */
-	public void setVersion( Calendar version )
-	{
-		this.version = version;
-	}
-	/**
-	 * @return the version
-	 */
-	public Calendar getVersion()
-	{
-		return this.version;
-	}
 }
