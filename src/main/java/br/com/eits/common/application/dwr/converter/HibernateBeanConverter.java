@@ -9,9 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.logging.Logger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.directwebremoting.ConversionException;
 import org.directwebremoting.convert.BeanConverter;
 import org.directwebremoting.extend.PlainProperty;
@@ -33,7 +32,7 @@ public class HibernateBeanConverter extends BeanConverter
     /**
      * The log stream
      */
-    private static final Log log = LogFactory.getLog(HibernateBeanConverter.class);
+    private static final Logger log = Logger.getLogger(HibernateBeanConverter.class.getName());
     
 	/*-------------------------------------------------------------------
 	 * 		 					ATTRIBUTES
@@ -106,7 +105,7 @@ public class HibernateBeanConverter extends BeanConverter
 
                     if (method == null)
                     {
-                        log.warn("Failed to find property: " + name);
+                        log.warning("Failed to find property: " + name);
 
                         properties.put(name, new PlainProperty(name, null));
                         continue;

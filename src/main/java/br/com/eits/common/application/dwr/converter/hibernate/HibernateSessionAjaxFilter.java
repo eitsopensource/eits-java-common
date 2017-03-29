@@ -1,11 +1,10 @@
 package br.com.eits.common.application.dwr.converter.hibernate;
 
 import java.lang.reflect.Method;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.directwebremoting.AjaxFilter;
 import org.directwebremoting.AjaxFilterChain;
 import org.directwebremoting.WebContextFactory;
@@ -25,7 +24,7 @@ public class HibernateSessionAjaxFilter implements AjaxFilter
     /**
      * The log stream
      */
-    private static final Log log = LogFactory.getLog(HibernateSessionAjaxFilter.class);
+    private static final Logger log = Logger.getLogger(HibernateSessionAjaxFilter.class.getName());
 
     /**
      * Under what name do we store the session factory?
@@ -51,7 +50,7 @@ public class HibernateSessionAjaxFilter implements AjaxFilter
         }
         else
         {
-            log.error("SessionFactory not initialized for this web application. Use: H4SessionAjaxFilter.setSessionFactory(servletContext, sessionFactory);");
+            log.severe("SessionFactory not initialized for this web application. Use: H4SessionAjaxFilter.setSessionFactory(servletContext, sessionFactory);");
         }
 
         Object reply = chain.doFilter(object, method, params);
