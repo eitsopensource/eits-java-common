@@ -1,7 +1,5 @@
 package br.com.eits.common.domain.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+
+import com.ibm.icu.util.Calendar;
 
 import lombok.Data;
 
@@ -40,11 +40,11 @@ public abstract class AbstractEntity implements IEntity<Long>
 	 * 
 	 */
 	@Column(nullable = false, updatable = false)
-	protected LocalDateTime created;
+	protected Calendar created;
 	/**
 	 * 
 	 */
-	protected LocalDateTime updated;
+	protected Calendar updated;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -76,7 +76,7 @@ public abstract class AbstractEntity implements IEntity<Long>
 	{
 		if ( this.getCreated() == null )
 		{
-			this.setCreated( LocalDateTime.now() );
+			this.setCreated( Calendar.getInstance() );
 		}
 	}
 
@@ -87,7 +87,7 @@ public abstract class AbstractEntity implements IEntity<Long>
 	protected void refreshUpdated()
 	{
 		this.refreshCreated();
-		this.setUpdated( LocalDateTime.now() );
+		this.setUpdated( Calendar.getInstance() );
 	}
 
 	/*-------------------------------------------------------------------
