@@ -4,7 +4,7 @@
 	
 	<groupId>br.com.eits</groupId>
 	<artifactId>eits-java-common</artifactId>
-	<version>2.0.2-RELEASE</version>
+	<version>2.0.3-RELEASE</version>
 	
 	<!-- Properties -->
 	<properties>
@@ -12,7 +12,7 @@
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		
     	<!-- Java -->
-    	<java.version>1.8</java.version>
+    	<java.version>1.7</java.version>
     	
 		<hibernate.version>4.3.8.Final</hibernate.version>
 		<hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
