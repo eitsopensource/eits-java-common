@@ -1,5 +1,6 @@
 package br.com.eits.common.domain.entity;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -40,11 +41,11 @@ public abstract class AbstractEntity implements IEntity<Long>
 	 * 
 	 */
 	@Column(nullable = false, updatable = false)
-	protected Calendar created;
+	protected LocalDateTime created;
 	/**
 	 * 
 	 */
-	protected Calendar updated;
+	protected LocalDateTime updated;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -76,7 +77,7 @@ public abstract class AbstractEntity implements IEntity<Long>
 	{
 		if ( this.getCreated() == null )
 		{
-			this.setCreated( Calendar.getInstance() );
+			this.setCreated( LocalDateTime.now() );
 		}
 	}
 
@@ -87,7 +88,7 @@ public abstract class AbstractEntity implements IEntity<Long>
 	protected void refreshUpdated()
 	{
 		this.refreshCreated();
-		this.setUpdated( Calendar.getInstance() );
+		this.setUpdated( LocalDateTime.now() );
 	}
 
 	/*-------------------------------------------------------------------

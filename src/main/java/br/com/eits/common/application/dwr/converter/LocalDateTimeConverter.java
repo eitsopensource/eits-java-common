@@ -56,7 +56,7 @@ public class LocalDateTimeConverter extends AbstractConverter
 		{
 			val = java.net.URLDecoder.decode( val, "UTF-8" );
 
-			if ( Pattern.matches( "^[0-9]+$", val ) )
+			if ( Pattern.matches( "^-?[0-9]+$", val ) )
 			{
 				long seconds = 0;
 				if ( val.length() > 0 )
