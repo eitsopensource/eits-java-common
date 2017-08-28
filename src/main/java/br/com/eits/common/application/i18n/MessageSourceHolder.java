@@ -119,4 +119,25 @@ public class MessageSourceHolder
 	{
 		MessageSourceHolder.messageSource = messageSource;
 	}
+
+	/**
+	 *
+	 * @param code
+	 * @return
+	 */
+	public static String translate( String code )
+	{
+		return getMessage( code );
+	}
+
+	/**
+	 *
+	 * @param code
+	 * @param args
+	 * @return
+	 */
+	public static String translate( String code, Object... args )
+	{
+		return getMessage( code, args );
+	}
 }
