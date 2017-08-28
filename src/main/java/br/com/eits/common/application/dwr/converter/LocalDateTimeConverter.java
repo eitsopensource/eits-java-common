@@ -117,7 +117,7 @@ public class LocalDateTimeConverter extends AbstractConverter
 		}
 		else if ( data instanceof LocalDate )
 		{
-			dt = LocalDateTime.of( ( LocalDate ) data, LocalTime.MIDNIGHT );
+			dt = LocalDateTime.of( ( LocalDate ) data, LocalTime.NOON );
 		}
 		else if ( data instanceof LocalTime )
 		{
