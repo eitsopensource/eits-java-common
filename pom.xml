@@ -4,7 +4,7 @@
 	
 	<groupId>br.com.eits</groupId>
 	<artifactId>eits-java-common</artifactId>
-	<version>3.0.0-RELEASE</version>
+	<version>3.0.1-RELEASE</version>
 	
 	<!-- Properties -->
 	<properties>
@@ -100,8 +100,8 @@
 		
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
   		</dependency>
   		
 		<!-- Jasper Reports -->
