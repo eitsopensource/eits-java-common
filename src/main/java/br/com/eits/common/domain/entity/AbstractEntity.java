@@ -1,7 +1,6 @@
 package br.com.eits.common.domain.entity;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

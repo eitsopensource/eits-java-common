@@ -10,7 +10,7 @@ import org.directwebremoting.extend.Property;
 import org.directwebremoting.extend.PropertyDescriptorProperty;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.proxy.LazyInitializer;
 
@@ -47,7 +47,7 @@ public class HibernatePropertyDescriptorProperty extends PropertyDescriptorPrope
     @Override
     public Object getValue(Object bean) throws ConversionException
     {
-        if (!(bean instanceof HibernateProxy))
+        if ( !(bean instanceof HibernateProxy) )
         {
             // This is not a hibernate dynamic proxy, just use it
             return super.getValue(bean);
@@ -56,32 +56,34 @@ public class HibernatePropertyDescriptorProperty extends PropertyDescriptorPrope
         {
             // If the property is already initialized, use it
             boolean initialized = Hibernate.isPropertyInitialized(bean, descriptor.getName());
-            if (initialized)
+            
+            if ( initialized )
             {
                 // This might be a lazy-collection so we need to double check
                 Object reply = super.getValue(bean);
                 initialized = Hibernate.isInitialized(reply);
             }
 
-            if (initialized)
+            if ( initialized )
             {
                 return super.getValue(bean);
             }
             else
             {
                 // If the session bound to the property is live, use it
-                HibernateProxy proxy = (HibernateProxy) bean;
-                LazyInitializer initializer = proxy.getHibernateLazyInitializer();
-                SessionImplementor implementor = initializer.getSession();
-                if (implementor.isOpen())
+                final HibernateProxy proxy = (HibernateProxy) bean;
+                final LazyInitializer initializer = proxy.getHibernateLazyInitializer();
+                final SharedSessionContractImplementor implementor = initializer.getSession();
+                
+                if ( implementor.isOpen() )
                 {
                     return super.getValue(bean);
                 }
 
                 // So the property needs database access, and the session is closed
                 // We'll need to try get another session
-                ServletContext context = WebContextFactory.get().getServletContext();
-                Session session = HibernateSessionAjaxFilter.getCurrentSession(context);
+                final ServletContext context = WebContextFactory.get().getServletContext();
+                final Session session = HibernateSessionAjaxFilter.getCurrentSession(context);
 
                 if (session != null)
                 {

@@ -16,7 +16,7 @@ import org.directwebremoting.convert.BeanConverter;
 import org.directwebremoting.extend.PlainProperty;
 import org.directwebremoting.extend.Property;
 import org.hibernate.Hibernate;
-import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.proxy.LazyInitializer;
 
@@ -154,16 +154,16 @@ public class HibernateBeanConverter extends BeanConverter
     {
         if (example instanceof HibernateProxy)
         {
-            HibernateProxy proxy = (HibernateProxy) example;
-            LazyInitializer initializer = proxy.getHibernateLazyInitializer();
-            SessionImplementor implementor = initializer.getSession();
+        	final HibernateProxy proxy = (HibernateProxy) example;
+            final LazyInitializer initializer = proxy.getHibernateLazyInitializer();
+            final SharedSessionContractImplementor implementor = initializer.getSession();
 
-            if (initializer.isUninitialized())
+            if ( initializer.isUninitialized() )
             {
                 try
                 {
                     // getImplementation is going to want to talk to a session
-                    if (implementor.isClosed())
+                    if ( implementor.isClosed() )
                     {
                         // Give up and return example.getClass();
                         return example.getClass();
@@ -189,13 +189,15 @@ public class HibernateBeanConverter extends BeanConverter
      */
     protected Method findGetter(Object data, String property) throws IntrospectionException
     {
-        Class<?> clazz = getClass(data);
-        String key = clazz.getName() + ":" + property;
+    		final Class<?> clazz = getClass(data);
+        final String key = clazz.getName() + ":" + property;
         Method method = methods.get(key);
+        
         if (method == null)
         {
             Method newMethod = null;
-        	PropertyDescriptor[] props = Introspector.getBeanInfo(clazz).getPropertyDescriptors();
+            PropertyDescriptor[] props = Introspector.getBeanInfo(clazz).getPropertyDescriptors();
+            
             for (PropertyDescriptor prop : props)
             {
                 if (prop.getName().equalsIgnoreCase(property))
@@ -204,7 +206,9 @@ public class HibernateBeanConverter extends BeanConverter
                 }
             }
             method = methods.putIfAbsent(key, newMethod);
-            if (method == null) {
+            
+            if (method == null) 
+            {
                 // put succeeded, use new value
                 method = newMethod;
             }

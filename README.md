@@ -16,18 +16,11 @@ This can be used on classes non managed by spring.
 This return a server full URL containing the scheme + the server host + port (if is not the 80) and the context name (when have).
 This can be used on classes non managed by spring.
 
-##DWR Converters (HibernateBeanConverter & LocalDateTimeConverter)
+##DWR Converters (HibernateBeanConverter, LocalDateTimeConverter, OptionalConverter)
 
 ##Custom Hibernate PostgreSQL Dialect
 Supporting a custom HQL function called `FILTER()`
 
-##Easy file management via Java JCR
-Infrastructure to store files via JCR implemented by Modeshape supported by a generic file repository `IMetaFileRepository` and its entity `MetaFile`.
-
-##Support of TRUNCATE TABLE to the DBUnit
-```java
-CascadeTruncateTableOperation.java
-```
 ##ReportManager
 ####Report generator implemented by `JasperReportManager`
 Supported methods:

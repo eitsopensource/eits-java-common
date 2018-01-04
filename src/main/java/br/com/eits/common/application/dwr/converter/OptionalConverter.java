@@ -17,14 +17,29 @@ import org.directwebremoting.extend.OutboundVariable;
  */
 public class OptionalConverter implements Converter
 {
+	/*-------------------------------------------------------------------
+	 * 		 					ATTRIBUTES
+	 *-------------------------------------------------------------------*/
+	/**
+	 * 
+	 */
 	private ConverterManager converterManager;
 
+	/*-------------------------------------------------------------------
+	 * 		 					BEHAVIORS
+	 *-------------------------------------------------------------------*/
+	/**
+	 * 
+	 */
 	@Override
 	public void setConverterManager( ConverterManager converterManager )
 	{
 		this.converterManager = converterManager;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public Object convertInbound( Class<?> paramType, InboundVariable data ) throws ConversionException
 	{
@@ -33,12 +48,16 @@ public class OptionalConverter implements Converter
 		return Optional.ofNullable( converterManager.convertInbound( optionalType, data, data.getContext().getCurrentProperty() ) );
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public OutboundVariable convertOutbound( Object data, OutboundContext outctx ) throws ConversionException
 	{
 		Optional<?> optional = (Optional<?>) data;
-		return
-				optional.map( val -> converterManager.convertOutbound( val, outctx ) )
-						.orElse( new NonNestedOutboundVariable( "null" ) );
+		
+		return optional
+					.map( val -> this.converterManager.convertOutbound( val, outctx ) )
+					.orElse( new NonNestedOutboundVariable( "null" ) );
 	}
 }
