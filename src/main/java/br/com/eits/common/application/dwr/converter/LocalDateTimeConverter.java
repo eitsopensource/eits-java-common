@@ -18,7 +18,7 @@ import org.directwebremoting.extend.ProtocolConstants;
 
 /**
  * Conversor para o Java 8 LocalDate, LocalTime, e LocalDateTime
- * 
+ *
  * @author eduardo
  */
 public class LocalDateTimeConverter extends AbstractConverter
@@ -27,7 +27,7 @@ public class LocalDateTimeConverter extends AbstractConverter
 	 * 		 					ATTRIBUTES
 	 *-------------------------------------------------------------------*/
 	/**
-	 * 
+	 *
 	 */
 	private final ZoneOffset localOffset = ZonedDateTime.now().getOffset();
 
@@ -113,15 +113,15 @@ public class LocalDateTimeConverter extends AbstractConverter
 		LocalDateTime dt;
 		if ( data instanceof LocalDateTime )
 		{
-			dt = ( LocalDateTime ) data;
+			dt = (LocalDateTime) data;
 		}
 		else if ( data instanceof LocalDate )
 		{
-			dt = LocalDateTime.of( ( LocalDate ) data, LocalTime.NOON );
+			dt = LocalDateTime.of( (LocalDate) data, LocalTime.NOON );
 		}
 		else if ( data instanceof LocalTime )
 		{
-			dt = LocalDateTime.of( LocalDate.now(), ( LocalTime ) data );
+			dt = LocalDateTime.of( LocalDate.now(), (LocalTime) data );
 		}
 		else
 		{

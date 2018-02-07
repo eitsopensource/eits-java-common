@@ -25,28 +25,28 @@ import org.springframework.util.StringUtils;
 public class DwrAnnotationPostProcessor extends CreatorParserHelper implements BeanFactoryPostProcessor
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final Log LOG = LogFactory.getLog( DwrAnnotationPostProcessor.class );
 
 	/**
-	 * 
+	 *
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void postProcessBeanFactory( ConfigurableListableBeanFactory beanFactory ) throws BeansException
 	{
-		final BeanDefinitionRegistry beanDefinitionRegistry = ( BeanDefinitionRegistry ) beanFactory;
-		
+		final BeanDefinitionRegistry beanDefinitionRegistry = (BeanDefinitionRegistry) beanFactory;
+
 		for ( String beanName : beanDefinitionRegistry.getBeanDefinitionNames() )
 		{
 			final BeanDefinition springConfigurator = ConfigurationParser.registerConfigurationIfNecessary( beanDefinitionRegistry );
 			final BeanDefinitionHolder beanDefinitionHolder = new BeanDefinitionHolder( beanDefinitionRegistry.getBeanDefinition( beanName ), beanName );
 			final Class<?> beanDefinitionClass = getBeanDefinitionClass( beanDefinitionHolder, beanDefinitionRegistry );
-			
+
 			if ( beanDefinitionClass != null )
 			{
 				final RemoteProxy remoteProxy = beanDefinitionClass.getAnnotation( RemoteProxy.class );
-				
+
 				if ( remoteProxy != null )
 				{
 					String javascript = remoteProxy.name();
@@ -62,7 +62,7 @@ public class DwrAnnotationPostProcessor extends CreatorParserHelper implements B
 					}
 					registerCreator( beanDefinitionHolder, beanDefinitionRegistry, beanDefinitionClass, javascript );
 				}
-				
+
 				final GlobalFilter globalFilter = beanDefinitionClass.getAnnotation( GlobalFilter.class );
 				if ( globalFilter != null )
 				{
@@ -70,8 +70,8 @@ public class DwrAnnotationPostProcessor extends CreatorParserHelper implements B
 					{
 						LOG.info( "Detected global filter [" + beanDefinitionClass + "]." );
 					}
-					
-					final ManagedList filters = ( ManagedList ) springConfigurator.getPropertyValues().getPropertyValue( "filters" ).getValue();
+
+					final ManagedList filters = (ManagedList) springConfigurator.getPropertyValues().getPropertyValue( "filters" ).getValue();
 					final Param[] params = globalFilter.params();
 					if ( params != null )
 					{
@@ -87,7 +87,6 @@ public class DwrAnnotationPostProcessor extends CreatorParserHelper implements B
 	}
 
 	/**
-	 * 
 	 * @param beanDefinitionHolder
 	 * @param beanDefinitionRegistry
 	 * @return

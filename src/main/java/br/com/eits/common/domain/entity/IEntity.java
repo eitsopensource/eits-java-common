@@ -16,11 +16,11 @@ public interface IEntity<ID extends Serializable> extends Serializable
 	 * 
 	 * @return
 	 */
-	public ID getId();
+	ID getId();
 
 	/**
 	 * 
 	 * @param id
 	 */
-	public void setId( ID id );
+	void setId( ID id );
 }

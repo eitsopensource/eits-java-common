@@ -1,6 +1,7 @@
 package br.com.eits.common.domain.entity;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -10,20 +11,22 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 
- * @author rodrigo@eits.com.br
- * @since 22/11/2012
- * @version 1.0
+ *
  */
 @Data
+@NoArgsConstructor
 @MappedSuperclass
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class)
 public abstract class AbstractEntity implements IEntity<Long>
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3875941859616104733L;
 
@@ -37,28 +40,21 @@ public abstract class AbstractEntity implements IEntity<Long>
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 	/**
-	 * 
+	 *
 	 */
 	@Column(nullable = false, updatable = false)
-	protected LocalDateTime created;
+	protected OffsetDateTime created;
 	/**
-	 * 
+	 *
 	 */
-	protected LocalDateTime updated;
+	protected OffsetDateTime updated;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
 	 *-------------------------------------------------------------------*/
-	/**
-	 * 
-	 */
-	public AbstractEntity()
-	{
-	}
 
 	/**
-	 * 
-	 * @param id
+	 *
 	 */
 	public AbstractEntity( Long id )
 	{
@@ -68,33 +64,35 @@ public abstract class AbstractEntity implements IEntity<Long>
 	/*-------------------------------------------------------------------
 	 * 		 					BEHAVIORS
 	 *-------------------------------------------------------------------*/
+
 	/**
-	 * 
+	 *
 	 */
 	@PrePersist
 	protected void refreshCreated()
 	{
 		if ( this.getCreated() == null )
 		{
-			this.setCreated( LocalDateTime.now() );
+			this.setCreated( OffsetDateTime.now() );
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@PreUpdate
 	protected void refreshUpdated()
 	{
 		this.refreshCreated();
-		this.setUpdated( LocalDateTime.now() );
+		this.setUpdated( OffsetDateTime.now() );
 	}
 
 	/*-------------------------------------------------------------------
 	 *				 	    GETTERS AND SETTERS
 	 *-------------------------------------------------------------------*/
+
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public Long getId()
@@ -103,7 +101,7 @@ public abstract class AbstractEntity implements IEntity<Long>
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setId( Long id )

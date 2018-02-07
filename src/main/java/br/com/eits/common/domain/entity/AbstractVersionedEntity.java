@@ -9,18 +9,17 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 
  * @author rodrigo@eits.com.br
- * @since 05/05/2016
  * @version 1.0
+ * @since 05/05/2016
  */
 @Data
 @MappedSuperclass
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public abstract class AbstractVersionedEntity extends AbstractEntity
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1172731705850432771L;
 	
@@ -28,25 +27,25 @@ public abstract class AbstractVersionedEntity extends AbstractEntity
 	 * 		 					ATTRIBUTES
 	 *-------------------------------------------------------------------*/
 	/**
-	 * 
+	 *
 	 */
 	@NotNull
 	@Version
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Long version;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
 	 *-------------------------------------------------------------------*/
+
 	/**
-	 * 
+	 *
 	 */
 	public AbstractVersionedEntity()
 	{
 	}
 
 	/**
-	 * 
 	 * @param id
 	 */
 	public AbstractVersionedEntity( Long id )

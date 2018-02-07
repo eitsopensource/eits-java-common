@@ -1,6 +1,7 @@
 package br.com.eits.common.infrastructure.hibernate.functions;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.QueryException;
 import org.hibernate.dialect.function.SQLFunction;
@@ -10,57 +11,48 @@ import org.hibernate.type.BooleanType;
 import org.hibernate.type.Type;
 
 /**
- * 
- * @author rodrigo@eits.com.br
+ *
  */
-public class PostgreSQLFilterFunction implements SQLFunction 
+public class PostgreSQLFilterFunction implements SQLFunction
 {
-	/**
-	 * 
-	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public String render(Type firstArgumentType, List arguments, SessionFactoryImplementor factory) throws QueryException 
-	{
-		try 
-		{
-			final String field = (String) arguments.get(0);
-			final String value = (String) arguments.get(1);
-			
-			final String fragment = "lower(unaccent(cast("+field+" as text))) "
-					   			  + "similar to lower( '%'|| array_to_string( regexp_split_to_array( coalesce( unaccent(cast("+value+" as text)), ''), ','), '%|%') ||'%' )";
-			return fragment;
-		} 
-		catch (IndexOutOfBoundsException e) 
-		{
-			throw new IllegalArgumentException("The function must be passed 2 arguments");
-		}
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public Type getReturnType(Type columnType, Mapping mapping) throws QueryException 
-	{
-		return new BooleanType();
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public boolean hasArguments() 
+	public boolean hasArguments()
 	{
 		return true;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
-	public boolean hasParenthesesIfNoArguments() 
+	public boolean hasParenthesesIfNoArguments()
 	{
 		return false;
+	}
+
+	@Override
+	public Type getReturnType( Type firstArgumentType, Mapping mapping ) throws QueryException
+	{
+		return new BooleanType();
+	}
+
+	// filter(:filter, usuario.id, usuario.login, usuario.nome)
+	// firstArgumentType = StringType
+	// arguments = [?, _usuario_0.id, _usuario_0.login, _usuario_0_nome]
+	// return -> filter(cast(? as text), _usuario_0_id as text, ...
+	@Override
+	@SuppressWarnings("unchecked")
+	public String render( Type firstArgumentType, List arguments, SessionFactoryImplementor factory ) throws QueryException
+	{
+		final String query = renderCast( (String) arguments.get( 0 ) );
+		final List<String> fields = ((List<String>) arguments).stream().skip( 1 )
+				.map( this::renderCast )
+				.collect( Collectors.toList() );
+		return String.format(
+				"filter(%s, %s)",
+				query,
+				String.join( ", ", fields ) );
+	}
+
+	private String renderCast( String field )
+	{
+		return String.format( "cast(%s as text)", field );
 	}
 }

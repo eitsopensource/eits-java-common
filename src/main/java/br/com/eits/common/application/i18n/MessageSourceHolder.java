@@ -34,7 +34,7 @@ public class MessageSourceHolder
 	 * @param defaultMessage
 	 * @return
 	 */
-	public static String getMessage( String code )
+	private static String getMessage( String code )
 	{
 		return getMessage( code, code );
 	}
@@ -45,7 +45,7 @@ public class MessageSourceHolder
 	 * @param defaultMessage
 	 * @return
 	 */
-	public static String getMessage( String code, String defaultMessage )
+	private static String getMessage( String code, String defaultMessage )
 	{
 		return getMessage( code, defaultMessage, (Object[]) null );
 	}
@@ -56,7 +56,7 @@ public class MessageSourceHolder
 	 * @param args
 	 * @return
 	 */
-	public static String getMessage( String code, Object... args )
+	private static String getMessage( String code, Object... args )
 	{
 		return getMessage( code, code, args );
 	}
@@ -68,7 +68,7 @@ public class MessageSourceHolder
 	 * @param defaultMessage
 	 * @return
 	 */
-	public static String getMessage( String code, String defaultMessage, Object... args )
+	private static String getMessage( String code, String defaultMessage, Object... args )
 	{
 		return getMessage( LocaleContextHolder.getLocale(), code, defaultMessage, args );
 	}
@@ -76,7 +76,7 @@ public class MessageSourceHolder
 	/* (non-Javadoc)
 	 * @see org.springframework.context.MessageSource#getMessage(java.lang.String, java.lang.Object[], java.lang.String, java.util.Locale)
 	 */
-	public static String getMessage( Locale locale, String code, String defaultMessage, Object... args )
+	private static String getMessage( Locale locale, String code, String defaultMessage, Object... args )
 	{
 		return getMessageSource().getMessage( code, args, defaultMessage, locale );
 	}
@@ -84,7 +84,7 @@ public class MessageSourceHolder
 	/* (non-Javadoc)
 	 * @see org.springframework.context.MessageSource#getMessage(java.lang.String, java.lang.Object[], java.util.Locale)
 	 */
-	public static String getMessage( Locale locale, String code, Object... args ) throws NoSuchMessageException
+	private static String getMessage( Locale locale, String code, Object... args ) throws NoSuchMessageException
 	{
 		return getMessageSource().getMessage( code, args, locale );
 	}
@@ -92,7 +92,7 @@ public class MessageSourceHolder
 	/* (non-Javadoc)
 	 * @see org.springframework.context.MessageSource#getMessage(org.springframework.context.MessageSourceResolvable, java.util.Locale)
 	 */
-	public static String getMessage( MessageSourceResolvable resolvable, Locale locale ) throws NoSuchMessageException
+	private static String getMessage( MessageSourceResolvable resolvable, Locale locale ) throws NoSuchMessageException
 	{
 		return getMessageSource().getMessage( resolvable, locale );
 	}

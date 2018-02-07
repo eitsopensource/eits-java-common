@@ -31,6 +31,6 @@ public class HTTPContextHolder
 		final int portNumber = servletRequest.getServerPort();
 		final String contextPath = servletRequest.getContextPath();
 
-		return scheme + "://" + serverName + ( portNumber == 80 ? "" : ":" + portNumber ) + ( contextPath.isEmpty() ? "" : contextPath );
+		return scheme + "://" + serverName + ( (portNumber == 80 || portNumber == 443) ? "" : ":" + portNumber ) + ( contextPath.isEmpty() ? "" : contextPath );
 	}
 }
