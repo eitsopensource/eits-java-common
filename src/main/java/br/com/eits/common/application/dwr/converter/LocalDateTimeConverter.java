@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.regex.Pattern;
 
 import org.directwebremoting.ConversionException;
@@ -64,6 +65,14 @@ public class LocalDateTimeConverter extends AbstractConverter
 					seconds = Long.parseLong( val ) / 1000;
 				}
 				date = LocalDateTime.ofEpochSecond( seconds, 0, localOffset );
+			}
+			else if ( val.endsWith( "Z" ) )
+			{
+				date = LocalDateTime.parse( val, new DateTimeFormatterBuilder()
+						.append( DateTimeFormatter.ISO_LOCAL_DATE_TIME )
+						.appendLiteral( 'Z' )
+						.toFormatter()
+				);
 			}
 			else if ( Pattern.matches( "^[0-9]{2}/[0-9]{2}/[0-9]{4}$", val ) )
 			{
