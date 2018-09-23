@@ -1,6 +1,5 @@
 package br.com.eits.common.domain.entity;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 import javax.persistence.Column;
@@ -11,8 +10,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
+import br.com.eits.common.infrastructure.json.EntityIdGenerator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @MappedSuperclass
-@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class)
+@JsonIdentityInfo(generator = EntityIdGenerator.class, property = "$id")
 public abstract class AbstractEntity implements IEntity<Long>
 {
 	/**
